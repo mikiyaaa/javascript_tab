@@ -4,6 +4,8 @@
   const $tab = $doc.getElementById('js-tab');
   const $nav = $tab.querySelectorAll('[data-nav]');
   const $content = $tab.querySelectorAll('[data-content]');
+  const ACTIVE_CLASS = 'is-active';
+  const navLength = $nav.length;
 
   // 初期化
   const init = () => {
@@ -21,22 +23,22 @@
     
     // 対象外のnav, contentを全てリセットする
     let index = 0;
-    while(index < $nav.length) {
+    while(index < navLength) {
       $content[index].style.display = 'none';
-      $nav[index].classList.remove('is-active');
+      $nav[index].classList.remove(ACTIVE_CLASS);
       index++;
     }
 
     // 対象のコンテンツをアクティブ化する
      $tab.querySelectorAll('[data-content="' + targetValue + '"]')[0].style.display = 'block';
-     $nav[targetValue].classList.add('is-active');
+     $nav[targetValue].classList.add(ACTIVE_CLASS);
      
   };
 
 
   // 全nav要素に対して関数を呼び出す・発火
   let index = 0;
-  while(index < $nav.length) {
+  while(index < navLength) {
     $nav[index].addEventListener('click', (e) => handleClick(e));
     index++;
   }
